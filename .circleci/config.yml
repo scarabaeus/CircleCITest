@@ -26,10 +26,10 @@ jobs:
 
 workflows:
   version: 2
-  CircleCITest_workflow:
+  CircleCITest_build:
     jobs:
       - build
-  CircleCITest-deploy:
+  CircleCITest_deploy:
     jobs:
        - deploy
 
