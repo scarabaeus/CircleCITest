@@ -30,12 +30,11 @@ workflows:
     jobs:
       - build
 
-  CircleCITest_deploy:
-    filters:
-      branches:
-        ignore: /.*/
-      tags:
-        only: /^\d+\.\d+\.\d+$/
-    jobs:
-       - deploy
-
+  # CircleCITest_deploy:
+  #   filters:
+  #     branches:
+  #       ignore: /.*/
+  #     tags:
+  #       only: /^\d+\.\d+\.\d+$/
+  #   jobs:
+  #      - deploy
