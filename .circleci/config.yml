@@ -15,14 +15,14 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        - echo "Deploy Test"
+        - run: echo "Build Test"
 
   deploy: 
     filters:
       tags:
         only: /^\d+\.\d+\.\d+$/
     steps:
-      - echo "Deploy Test"
+      - run: echo "Deploy Test"
 
 workflows:
   version: 2
