@@ -1,26 +1,52 @@
-version: 2
 jobs:
   build:
     docker:
       - image: circleci/node:7.10
     steps:
       - checkout
-      - restore_cache:
-        - run: echo "Build Test"
+      - run: echo "Run Build"
 
-  deploy: 
-    filters:
-      tags:
-        only: /^\d+\.\d+\.\d+$/
+  test:
+    docker:
+      - image: circleci/node:7.10
     steps:
-      - run: echo "Deploy Test"
+      - run: echo "Run Test"
+  
+  deploy:
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - run: echo "Run Deploy"
 
 workflows:
   version: 2
-  CircleCITest_build:
+  build_and_test:
     jobs:
       - build
+      - test
 
+# version: 2
+# jobs:
+#   build:
+#     docker:
+#       - image: circleci/node:7.10
+#     steps:
+#       - checkout
+#       - restore_cache:
+#         - run: echo "Build Test"
+
+#   deploy: 
+#     filters:
+#       tags:
+#         only: /^\d+\.\d+\.\d+$/
+#     steps:
+#       - run: echo "Deploy Test"
+
+# workflows:
+#   version: 2
+#   CircleCITest_build:
+#     jobs:
+#       - build
   # CircleCITest_deploy:
   #   filters:
   #     branches:
