@@ -30,6 +30,9 @@ workflows:
     jobs:
       - build
   CircleCITest_deploy:
+    filters:
+      tags:
+        only: /^\d+\.\d+\.\d+$/
     jobs:
        - deploy
 
