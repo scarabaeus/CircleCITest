@@ -10,16 +10,12 @@ jobs:
   test:
     docker:
       - image: circleci/node:7.10
-    requires: 
-      - build
     steps:
       - run: echo "Run Test"
   
   deploy:
     docker:
       - image: circleci/node:7.10
-    requires: 
-      - test
     steps:
       - run: echo "Run Deploy"
 
@@ -29,7 +25,9 @@ workflows:
     jobs:
       - build
       - test
+        requires: build
       - deploy
+        requires: test
         
 
 # version: 2
