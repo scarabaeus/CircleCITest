@@ -16,9 +16,6 @@ jobs:
   deploy:
     docker:
       - image: circleci/node:7.10
-    filters:
-      tags:
-        only: /^\d+\.\d+\.\d+$/
     steps:
       - run: echo "Deploy Test"
 
