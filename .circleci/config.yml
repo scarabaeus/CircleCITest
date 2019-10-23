@@ -32,13 +32,13 @@ workflows:
             - build
 
   deploy_prod:
-    jobs:
-      - deploy
     filters:
       branches:
         ignore: /.*/
       tags:
         only: /^\d+\.\d+\.\d+$/
+    jobs:
+     - deploy
 
         
 
