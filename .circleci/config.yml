@@ -34,8 +34,6 @@ workflows:
   deploy_prod:
     jobs:
       - deploy
-    requires:
-      - build
     filters:
       branches:
         ignore: /.*/
