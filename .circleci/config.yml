@@ -20,7 +20,7 @@ jobs:
       - run: 
           name: "Setup custom environment variables"
           command: |
-            echo 'export MY_ENV_VAR="My Branch = ${CIRCLE_BRANCH}"' >> $BASH_ENV
+            echo 'export MY_ENV_VAR="Repo - ${CIRCLE_PROJECT_REPONAME}; SHA1 - ${CIRCLE_SHA1}; Branch - ${CIRCLE_BRANCH}; Build Num - ${CIRCLE_BUILD_NUM}; "' >> $BASH_ENV
       - run:
           name: "My Deployment Output"
           command: echo ${CIRCLE_BRANCH}
