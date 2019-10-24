@@ -26,7 +26,7 @@ jobs:
           command: echo ${CIRCLE_BRANCH}
       - run:
           name: "What was my custom environment variable?"
-          command: echo ${MY_ENV_VAR}
+          command: echo ${DEPLOYMENT_BUNDLE_NAME}
 
 workflows:
   version: 2
