@@ -20,7 +20,7 @@ jobs:
       - run: 
           name: "Setup custom environment variables"
           command: |
-            echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
+            echo 'export MY_ENV_VAR="My Branch = ${CIRCLE_BRANCH}"' >> $BASH_ENV
       - run:
           name: "My Deployment Output"
           command: echo ${CIRCLE_BRANCH}
