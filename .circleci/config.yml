@@ -19,7 +19,7 @@ jobs:
     steps:
       - run:
           name: "My Deployment Output"
-          command: echo "Deploy Test " > ${CIRCLE_BRANCH}
+          command: echo ${CIRCLE_BRANCH}
 
 workflows:
   version: 2
