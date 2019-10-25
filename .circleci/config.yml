@@ -16,7 +16,7 @@ jobs:
     steps:
       - run: echo "Run Test"
       - slack/notify:
-          channel: returns-deployment
+          channel: '#returns-deployment'
           color: '#42e2f4'
           mentions: '@Steve,@Jin.Chen,'
           message: 'Build package created. Type git tag CIRCLE_SHA1 environment to deploy'
