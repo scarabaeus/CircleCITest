@@ -45,7 +45,8 @@ workflows:
 
   CircleCITest_Deploy_Prod:
     jobs:
-     - deploy:
+      - retrieve_package
+      - deploy:
         filters:
           branches:
             ignore: /.*/
