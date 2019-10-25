@@ -31,7 +31,7 @@ jobs:
           name: "My Deployment Output"
           command: echo ${CIRCLE_BRANCH}
       - run:
-          name: "Deployment Output"
+          name: "Deployment Bundle"
           command: echo ${DEPLOYMENT_BUNDLE_NAME}
 
 workflows:
