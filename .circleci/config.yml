@@ -18,7 +18,8 @@ jobs:
       - slack/notify:
           channel: returns-deployment
           color: '#42e2f4'
-          message: Build package created. Type `git tag ${CIRCLE_SHA1} <environment>` to deploy
+          mentions: '@Steve,@Jin.Chen,'
+          message: 'Build package created. Type `git tag ${CIRCLE_SHA1} <environment>` to deploy'
           webhook: https://hooks.slack.com/services/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
 
   retrieve_package:
