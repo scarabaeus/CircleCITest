@@ -45,7 +45,12 @@ workflows:
 
   CircleCITest_Deploy_Prod:
     jobs:
-      - retrieve_package
+      - retrieve_package:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^\d+\.\d+\.\d+$/
       - deploy:
           filters:
             branches:
