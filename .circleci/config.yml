@@ -45,20 +45,30 @@ workflows:
 
   CircleCITest_Deploy_Prod:
     jobs:
-      - retrieve_package:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^production$/
       - deploy:
           filters:
             branches:
               ignore: /.*/
             tags:
               only: /^production$/
-          requires: 
-            - retrieve_package
+
+  CircleCITest_Deploy_QA:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^(qa01|qa02)$/
+
+  CircleCITest_Deploy_Stage:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^stage$/
 
         
 
