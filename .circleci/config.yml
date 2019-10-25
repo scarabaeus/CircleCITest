@@ -12,6 +12,12 @@ jobs:
       - image: circleci/node:7.10
     steps:
       - run: echo "Run Test"
+
+  retrieve_package:
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - run: echo "Run Retrieve"
   
   deploy:
     docker:
@@ -30,21 +36,23 @@ jobs:
 
 workflows:
   version: 2
-  # build_and_test:
-  #   jobs:
-  #     - build
-  #     - test:
-  #         requires: 
-  #           - build
-
-  deploy_prod:
+  CircleCITest_CI_Build:
     jobs:
-     - deploy
-        # filters:
-        #   branches:
-        #     ignore: /.*/
-        #   tags:
-        #     only: /^\d+\.\d+\.\d+$/
+      - build
+      - test:
+          requires: 
+            - build
+
+  CircleCITest_Deploy_Prod:
+    jobs:
+     - deploy:
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /^\d+\.\d+\.\d+$/
+        requires: 
+          - retrieve_package
 
         
 
