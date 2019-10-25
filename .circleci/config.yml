@@ -47,13 +47,13 @@ workflows:
     jobs:
       - retrieve_package
       - deploy:
-        filters:
-          branches:
-            ignore: /.*/
-          tags:
-            only: /^\d+\.\d+\.\d+$/
-        requires: 
-          - retrieve_package
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^\d+\.\d+\.\d+$/
+          requires: 
+            - retrieve_package
 
         
 
