@@ -31,7 +31,7 @@ jobs:
           name: "My Deployment Output"
           command: echo ${CIRCLE_BRANCH}
       - run:
-          name: "What was my custom environment variable?"
+          name: "Deployment Output"
           command: echo ${DEPLOYMENT_BUNDLE_NAME}
 
 workflows:
@@ -52,6 +52,15 @@ workflows:
             tags:
               only: /^production$/
 
+  CircleCITest_Deploy_Stage:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^stage$/
+
   CircleCITest_Deploy_QA:
     jobs:
       - deploy:
@@ -61,14 +70,7 @@ workflows:
             tags:
               only: /^(qa01|qa02)$/
 
-  CircleCITest_Deploy_Stage:
-    jobs:
-      - deploy:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^stage$/
+  
 
         
 
