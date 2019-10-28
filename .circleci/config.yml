@@ -19,7 +19,7 @@ jobs:
           channel: 'returns-deployment'
           mentions: 'Steve,Jin.Chen'
           color: '#bada55'
-          message: 'Build package created. To deploy type git tag CIRCLE_SHA1 environment'
+          message: 'Build package created -- To deploy type git tag CIRCLE_SHA1 environment'
           webhook: '${SLACK_WEBHOOK}'
 
   retrieve_package:
