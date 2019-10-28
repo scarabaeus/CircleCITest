@@ -17,9 +17,10 @@ jobs:
       - run: echo "Run Test"
       - slack/notify:
           channel: 'returns-deployment'
-          color: '#42e2f4'
+          mentions: 'Steve,Jin.Chen'
+          color: '#bada55'
           message: 'Build package created. To deploy type git tag CIRCLE_SHA1 environment'
-          webhook: 'https://hooks.slack.com/services/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'
+          webhook: '${SLACK_WEBHOOK}'
 
   retrieve_package:
     docker:
