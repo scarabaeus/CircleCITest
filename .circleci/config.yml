@@ -17,9 +17,9 @@ jobs:
       - run: echo "Run Test"
       - slack/notify:
           channel: 'returns-deployment'
-          mentions: 'Steve,Jin.Chen'
+          mentions: 'Steve,ankush.goyal'
           color: '#bada55'
-          message: 'Build package created -- To deploy type git tag CIRCLE_SHA1 environment'
+          message: 'Build package created -- To deploy type `git tag CIRCLE_SHA1 <environment>` in a command prompt'
           webhook: '${SLACK_WEBHOOK}'
 
   retrieve_package:
