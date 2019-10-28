@@ -14,7 +14,7 @@ jobs:
     docker:
       - image: circleci/node:7.10
     steps:
-      - run: echo "Run Test"
+      - run: 
           name: "Setup custom environment variables"
           command: |
             echo 'export DEPLOYMENT_BUNDLE_NAME="${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BRANCH}.${CIRCLE_BUILD_NUM}.${CIRCLE_SHA1}.zip"' >> $BASH_ENV
