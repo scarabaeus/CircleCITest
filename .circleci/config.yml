@@ -20,9 +20,10 @@ jobs:
             echo 'export DEPLOYMENT_BUNDLE_NAME="${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BRANCH}.${CIRCLE_BUILD_NUM}.${CIRCLE_SHA1}.zip"' >> $BASH_ENV
       - slack/notify:
           channel: 'returns-deployment'
-          mentions: 'jin.chen,ankush.goyal,steve'
+          # mentions: 'jin.chen,ankush.goyal,steve'
           color: '#bada55'
-          message: 'Build package created for ${CIRCLE_PROJECT_REPONAME} ${CIRCLE_BRANCH} -- To deploy type `git tag CIRCLE_SHA1 <environment>` in a command prompt'
+          message: 'Build package created for Repo: ${CIRCLE_PROJECT_REPONAME} Branch: ${CIRCLE_BRANCH}'
+          footer: 'To deploy issue the following git command: git tag ${CIRCLE_SHA1} <environment>'
           webhook: '${SLACK_WEBHOOK}'
 
   retrieve_package:
