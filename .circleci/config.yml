@@ -43,7 +43,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#F8CA00'
-          title: 'Returns Front End QA deployment initiated - #${CIRCLE_BUILD_NUM}'
+          title: ':yellow_heart: Returns Front End QA deployment initiated - #${CIRCLE_BUILD_NUM}'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -61,7 +61,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#F8CA00'
-          title: 'Returns Front End deployed to *QA* - #${CIRCLE_BUILD_NUM}'
+          title: ':yellow_heart: Returns Front End deployed to *QA* - #${CIRCLE_BUILD_NUM}'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           webhook: '${SLACK_WEBHOOK}'
@@ -75,7 +75,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#E97F02'
-          title: 'Returns Front End STAGING deployment initiated - #${CIRCLE_BUILD_NUM}'
+          title: ':orange_heart: Returns Front End STAGING deployment initiated - #${CIRCLE_BUILD_NUM}'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -93,7 +93,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#E97F02'
-          title: 'Returns Front End deployed to *STAGING* - #${CIRCLE_BUILD_NUM}'
+          title: ':orange_heart: Returns Front End deployed to *STAGING* - #${CIRCLE_BUILD_NUM}'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           webhook: '${SLACK_WEBHOOK}'
@@ -122,7 +122,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#BD1550'
-          title: 'Returns Front End PRODUCTION deployment started'
+          title: ':sparkling_heart: Returns Front End PRODUCTION deployment started'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -140,7 +140,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#BD1550'
-          title: 'Returns Front End PRODUCTION deployment complete'
+          title: ':sparkling_heart: Returns Front End PRODUCTION deployment complete'
           message: '*Initiator:* ${CIRCLE_USERNAME}'
           footer: 'Not really...  this is just a workflow test.'
           webhook: '${SLACK_WEBHOOK}'
@@ -159,7 +159,7 @@ workflows:
   CircleCITest_Deploy_Prod:
     jobs:
       - slack/approval-notification:
-          message: 'APPROVAL REQUIRED - Returns Front End deployment initiated to PRODUCTION by ${CIRCLE_USERNAME}'
+          message: ':sparkling_heart: APPROVAL REQUIRED - Returns Front End deployment initiated to PRODUCTION by ${CIRCLE_USERNAME}'
           url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
           color: "#BD1550"
           webhook: '${SLACK_WEBHOOK}'
