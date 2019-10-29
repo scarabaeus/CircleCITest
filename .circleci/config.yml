@@ -21,7 +21,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#bada55'
-          title: ':package: ${CIRCLE_WORKFLOW_ID} Returns Front End deployment package created'
+          title: ':package: #${CIRCLE_WORKFLOW_ID} Returns Front End deployment package created'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Repo:* \`${CIRCLE_PROJECT_REPONAME}\` - *Branch:* \`${CIRCLE_BRANCH}\` - *Initiator:* \`${CIRCLE_USERNAME}\`'
           footer: 'To deploy: \`git tag ${CIRCLE_SHA1} <environment>\`'
@@ -43,7 +43,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#ffffff'
-          title: ':white_circle: ${CIRCLE_WORKFLOW_ID} Returns Front End QA deployment initiated'
+          title: ':white_circle: #${CIRCLE_WORKFLOW_ID} Returns Front End QA deployment initiated'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -61,7 +61,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#ffffff'
-          title: ':white_circle: ${CIRCLE_WORKFLOW_ID} Returns Front End deployed to *QA*'
+          title: ':white_circle: #${CIRCLE_WORKFLOW_ID} Returns Front End deployed to *QA*'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           webhook: '${SLACK_WEBHOOK}'
@@ -75,7 +75,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#0000ff'
-          title: ':blue_circle: ${CIRCLE_WORKFLOW_ID} Returns Front End STAGING deployment initiated'
+          title: ':blue_circle: #${CIRCLE_WORKFLOW_ID} Returns Front End STAGING deployment initiated'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -93,7 +93,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#0000ff'
-          title: ':large_blue_circle: ${CIRCLE_WORKFLOW_ID} Returns Front End deployed to *STAGING*'
+          title: ':large_blue_circle: #${CIRCLE_WORKFLOW_ID} Returns Front End deployed to *STAGING*'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           webhook: '${SLACK_WEBHOOK}'
@@ -105,7 +105,7 @@ jobs:
       - image: circleci/node:7.10
     steps:
       - slack/approval:
-          title: ":red_circle: ${CIRCLE_WORKFLOW_ID} Returns Front End PRODUCTION approval required"
+          title: ":red_circle: #${CIRCLE_WORKFLOW_ID} Returns Front End PRODUCTION approval required"
           message: '*Branch:* ${CIRCLE_BRANCH} - *Tag:* \`${CIRCLE_TAG}\` - *Initiator:* \`${CIRCLE_USERNAME}\`'
           url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
           #mentions: "ankush.goyal,jin.chen,"
