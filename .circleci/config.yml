@@ -43,17 +43,17 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#F8CA00'
-          title: ':yellow_heart: Returns Front End QA deployment initiated - #${CIRCLE_BUILD_NUM}'
+          title: 'Returns Front End QA deployment has been approved - Starting deployment.'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
           include_job_number_field: false
       - run: 
-          name: "Setup custom environment variables"
+          name: "Setup custom QA environment variables"
           command: |
             echo 'export DEPLOYMENT_BUNDLE_NAME="${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BRANCH}.${CIRCLE_BUILD_NUM}.${CIRCLE_SHA1}.zip"' >> $BASH_ENV
       - run:
-          name: "My Deployment Output"
+          name: "My Deployment QA Output"
           command: echo ${CIRCLE_BRANCH}
       - run:
           name: "Deployment Bundle"
@@ -61,9 +61,9 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#F8CA00'
-          title: ':yellow_heart: Returns Front End deployed to *QA* - #${CIRCLE_BUILD_NUM}'
-          title_link: '${CIRCLE_COMPARE_URL}'
-          message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
+          title: 'Returns Front End QA deployment complete'
+          message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
+          footer: 'Not really...  this is just a workflow test.'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
           include_job_number_field: false
@@ -75,7 +75,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#E97F02'
-          title: ':orange_heart: Returns Front End STAGING deployment initiated - #${CIRCLE_BUILD_NUM}'
+          title: 'Returns Front End STAGING deployment has been approved - Starting deployment.'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -93,27 +93,12 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#E97F02'
-          title: ':orange_heart: Returns Front End deployed to *STAGING* - #${CIRCLE_BUILD_NUM}'
-          title_link: '${CIRCLE_COMPARE_URL}'
-          message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
+          title: 'Returns Front End STAGING deployment complete'
+          message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
+          footer: 'Not really...  this is just a workflow test.'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
           include_job_number_field: false
-
-  request_prod_deploy_approval:
-    docker:
-      - image: circleci/node:7.10
-    steps:
-      - run:
-          name: "My Deployment Output"
-          command: echo ${CIRCLE_BRANCH}
-      - slack/approval:
-          title: "Returns Front End PRODUCTION approval required - #${CIRCLE_BUILD_NUM}"
-          message: '*Branch:* ${CIRCLE_BRANCH} - *Tag:* \`${CIRCLE_TAG}\` - *Initiator:* \`${CIRCLE_USERNAME}\`'
-          url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
-          #mentions: "ankush.goyal,jin.chen,"
-          color: "#ff0000"
-          webhook: '${SLACK_WEBHOOK}'
 
   prod_deploy:
     docker:
@@ -122,7 +107,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#BD1550'
-          title: ':sparkling_heart: Returns Front End PRODUCTION deployment started'
+          title: 'Returns Front End PRODUCTION deployment has been approved - Starting deployment.'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -140,8 +125,8 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#BD1550'
-          title: ':sparkling_heart: Returns Front End PRODUCTION deployment complete'
-          message: '*Initiator:* ${CIRCLE_USERNAME}'
+          title: 'Returns Front End PRODUCTION deployment complete'
+          message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           footer: 'Not really...  this is just a workflow test.'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -166,7 +151,7 @@ workflows:
             tags:
               only: /^deploy-production-.*$/
       - slack/approval-notification:
-          message: ':sparkling_heart: APPROVAL REQUIRED - Returns Front End deployment initiated to PRODUCTION by ${CIRCLE_USERNAME}'
+          message: 'APPROVAL REQUIRED - Returns Front End deployment initiated to PRODUCTION by ${CIRCLE_USERNAME}'
           url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
           color: "#BD1550"
           webhook: '${SLACK_WEBHOOK}'
@@ -176,7 +161,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^deploy-production-.*$/
+              only: /^production-.*$/
       - prod_deploy:
           requires:
             - hold
@@ -185,7 +170,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^deploy-production-.*$/
+              only: /^production-.*$/
       
   CircleCITest_Deploy_Stage:
     jobs:
@@ -194,7 +179,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^deploy-stage-.*$/
+              only: /^stage-.*$/
 
   CircleCITest_Deploy_QA:
     jobs:
@@ -203,7 +188,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^deploy-(qa01|qa02)-.*$/
+              only: /^(qa01|qa02)-.*$/
 
   
 
