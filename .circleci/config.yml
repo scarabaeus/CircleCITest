@@ -139,6 +139,7 @@ jobs:
           color: '#ff0000'
           title: ':red_circle: Returns Front End deployed to PRODUCTION'
           message: '*Initiator:* ${CIRCLE_USERNAME}'
+          footer: 'Not really...  this is just a workflow test.'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
           include_job_number_field: false
