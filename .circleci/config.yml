@@ -156,14 +156,14 @@ workflows:
     jobs:
       - request_prod_deploy_approval:
           type: approval
+      - prod_deploy:
+          requires:
+            - request_prod_deploy_approval
           filters:
             branches:
               ignore: /.*/
             tags:
               only: /^deploy-production-.*$/
-      - prod_deploy:
-          requires:
-            - request_prod_deploy_approval
 
   CircleCITest_Deploy_Stage:
     jobs:
