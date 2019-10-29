@@ -42,10 +42,12 @@ jobs:
     steps:
       - slack/notify:
           channel: 'returns-deployment'
-          mentions: 'jin.chen,ankush.goyal,steve'
           color: '#ffffff'
-          message: 'Deploying CIRCLE_SHA1 to *QA*.'
+          title: ':white_circle: Returns Front End QA deployment initiated'
+          message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
+          include_project_field: false
+          include_job_number_field: false
       - run: 
           name: "Setup custom environment variables"
           command: |
@@ -73,8 +75,11 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#0000ff'
-          message: 'Deploying CIRCLE_SHA1 to *STAGING*'
+          title: ':blue_circle: Returns Front End STAGING deployment initiated'
+          message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
+          include_project_field: false
+          include_job_number_field: false
       - run: 
           name: "Setup custom environment variables"
           command: |
@@ -111,7 +116,7 @@ jobs:
           channel: 'returns-deployment'
           color: '#ff0000'
           title: ':red_circle: Returns Front End PRODUCTION deployment initiated'
-          message: 'Deploying CIRCLE_SHA1 to *PRODUCTION*.'
+          message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
           include_job_number_field: false
