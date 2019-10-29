@@ -20,7 +20,7 @@ jobs:
             echo 'export DEPLOYMENT_BUNDLE_NAME="${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BRANCH}.${CIRCLE_BUILD_NUM}.${CIRCLE_SHA1}.tar.gz"' >> $BASH_ENV
       - slack/notify:
           channel: 'returns-deployment'
-          color: '#bada55'
+          color: '#8A9B0F'
           title: ':package: Returns Front End deployment package created - #${CIRCLE_BUILD_NUM}'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Repo:* \`${CIRCLE_PROJECT_REPONAME}\` - *Branch:* \`${CIRCLE_BRANCH}\` - *Initiator:* \`${CIRCLE_USERNAME}\`'
