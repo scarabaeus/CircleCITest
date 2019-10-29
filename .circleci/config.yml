@@ -23,7 +23,7 @@ jobs:
           # mentions: 'jin.chen,ankush.goyal,steve'
           color: '#bada55'
           message: 'Build package created for Repo: ${CIRCLE_PROJECT_REPONAME} Branch: ${CIRCLE_BRANCH}'
-          footer: 'To deploy issue the following git command: git tag ${CIRCLE_SHA1} <environment>'
+          footer: 'To deploy: git tag ${CIRCLE_SHA1} <environment>'
           webhook: '${SLACK_WEBHOOK}'
 
   retrieve_package:
