@@ -106,7 +106,7 @@ jobs:
     steps:
       - slack/approval:
           title: ":red_circle: Returns Front End PRODUCTION approval required"
-          message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
+          message: '*Branch:* ${CIRCLE_BRANCH} - *Tag:* \`${CIRCLE_TAG}\` - *Initiator:* \`${CIRCLE_USERNAME}\`'
           url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
           #mentions: "ankush.goyal,jin.chen,"
           color: "#ff0000"
