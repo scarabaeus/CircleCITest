@@ -122,7 +122,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#ff0000'
-          title: ':red_circle: Returns Front End PRODUCTION deployment initiated'
+          title: ':red_circle: Returns Front End PRODUCTION deployment started'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -140,7 +140,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#ff0000'
-          title: ':red_circle: Returns Front End deployed to PRODUCTION'
+          title: ':red_circle: Returns Front End PRODUCTION deployment complete'
           message: '*Initiator:* ${CIRCLE_USERNAME}'
           footer: 'Not really...  this is just a workflow test.'
           webhook: '${SLACK_WEBHOOK}'
