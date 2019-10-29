@@ -43,7 +43,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#F8CA00'
-          title: 'Returns Front End QA deployment has been approved - Starting deployment.'
+          title: 'Returns Front End QA deployment deployment started.'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
