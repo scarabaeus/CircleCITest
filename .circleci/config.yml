@@ -95,6 +95,14 @@ jobs:
           include_project_field: false
           include_job_number_field: false
 
+  request_prod_deploy_approval:
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - run:
+          name: "Requesting approval"
+          command: echo S
+
   prod_deploy:
     docker:
       - image: circleci/node:7.10
@@ -102,8 +110,11 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#ff0000'
+          title: ':red_circle: ${CIRCLE_PROJECT_REPONAME} PRODUCTION deployment initiated'
           message: 'Deploying CIRCLE_SHA1 to *PRODUCTION*.'
           webhook: '${SLACK_WEBHOOK}'
+          include_project_field: false
+          include_job_number_field: false
       - run: 
           name: "Setup custom environment variables"
           command: |
@@ -117,9 +128,8 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#ff0000'
-          title: ':red_circle: ${CIRCLE_PROJECT_REPONAME} deployed to *PRODUCTION*'
-          title_link: '${CIRCLE_COMPARE_URL}'
-          message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
+          title: ':red_circle: ${CIRCLE_PROJECT_REPONAME} deployed to PRODUCTION'
+          message: '*Initiator:* ${CIRCLE_USERNAME}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
           include_job_number_field: false
@@ -135,7 +145,11 @@ workflows:
 
   CircleCITest_Deploy_Prod:
     jobs:
+      - request_prod_deploy_approval:
+          type: approval
       - prod_deploy:
+          requires:
+            - request_prod_deploy_approval
           filters:
             branches:
               ignore: /.*/
