@@ -23,7 +23,7 @@ jobs:
           color: '#bada55'
           title: ':package: Returns Front End deployment package created'
           title_link: '${CIRCLE_COMPARE_URL}'
-          message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
+          message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST} - Package: ${DEPLOYMENT_BUNDLE_NAME}'
           footer: 'To deploy: \`git tag ${CIRCLE_SHA1} <environment>\`'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
