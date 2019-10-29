@@ -42,8 +42,8 @@ jobs:
     steps:
       - slack/notify:
           channel: 'returns-deployment'
-          color: '#ffffff'
-          title: ':white_circle: Returns Front End QA deployment initiated - #${CIRCLE_BUILD_NUM}'
+          color: '#F8CA00'
+          title: 'Returns Front End QA deployment initiated - #${CIRCLE_BUILD_NUM}'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -60,8 +60,8 @@ jobs:
           command: echo ${DEPLOYMENT_BUNDLE_NAME}
       - slack/notify:
           channel: 'returns-deployment'
-          color: '#ffffff'
-          title: ':white_circle: Returns Front End deployed to *QA* - #${CIRCLE_BUILD_NUM}'
+          color: '#F8CA00'
+          title: 'Returns Front End deployed to *QA* - #${CIRCLE_BUILD_NUM}'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           webhook: '${SLACK_WEBHOOK}'
@@ -74,8 +74,8 @@ jobs:
     steps:
       - slack/notify:
           channel: 'returns-deployment'
-          color: '#0000ff'
-          title: ':blue_circle: Returns Front End STAGING deployment initiated - #${CIRCLE_BUILD_NUM}'
+          color: '#E97F02'
+          title: 'Returns Front End STAGING deployment initiated - #${CIRCLE_BUILD_NUM}'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -92,8 +92,8 @@ jobs:
           command: echo ${DEPLOYMENT_BUNDLE_NAME}
       - slack/notify:
           channel: 'returns-deployment'
-          color: '#0000ff'
-          title: ':large_blue_circle: Returns Front End deployed to *STAGING* - #${CIRCLE_BUILD_NUM}'
+          color: '#E97F02'
+          title: 'Returns Front End deployed to *STAGING* - #${CIRCLE_BUILD_NUM}'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           webhook: '${SLACK_WEBHOOK}'
@@ -108,7 +108,7 @@ jobs:
           name: "My Deployment Output"
           command: echo ${CIRCLE_BRANCH}
       - slack/approval:
-          title: ":red_circle: Returns Front End PRODUCTION approval required - #${CIRCLE_BUILD_NUM}"
+          title: "Returns Front End PRODUCTION approval required - #${CIRCLE_BUILD_NUM}"
           message: '*Branch:* ${CIRCLE_BRANCH} - *Tag:* \`${CIRCLE_TAG}\` - *Initiator:* \`${CIRCLE_USERNAME}\`'
           url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
           #mentions: "ankush.goyal,jin.chen,"
@@ -121,8 +121,8 @@ jobs:
     steps:
       - slack/notify:
           channel: 'returns-deployment'
-          color: '#ff0000'
-          title: ':red_circle: Returns Front End PRODUCTION deployment started'
+          color: '#BD1550'
+          title: 'Returns Front End PRODUCTION deployment started'
           message: '*Initiator:* ${CIRCLE_USERNAME} - *Tag:* ${CIRCLE_TAG}'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -139,8 +139,8 @@ jobs:
           command: echo ${DEPLOYMENT_BUNDLE_NAME}
       - slack/notify:
           channel: 'returns-deployment'
-          color: '#ff0000'
-          title: ':red_circle: Returns Front End PRODUCTION deployment complete'
+          color: '#BD1550'
+          title: 'Returns Front End PRODUCTION deployment complete'
           message: '*Initiator:* ${CIRCLE_USERNAME}'
           footer: 'Not really...  this is just a workflow test.'
           webhook: '${SLACK_WEBHOOK}'
@@ -159,9 +159,9 @@ workflows:
   CircleCITest_Deploy_Prod:
     jobs:
       - slack/approval-notification:
-          message: ':red_circle: APPROVAL REQUIRED - Returns Front End deployment initiated to PRODUCTION by ${CIRCLE_USERNAME}'
+          message: 'APPROVAL REQUIRED - Returns Front End deployment initiated to PRODUCTION by ${CIRCLE_USERNAME}'
           url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
-          color: "#ff0000"
+          color: "#BD1550"
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
           include_job_number_field: false
