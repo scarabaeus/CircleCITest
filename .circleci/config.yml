@@ -43,8 +43,8 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           mentions: 'jin.chen,ankush.goyal,steve'
-          color: '#bada55'
-          message: 'Deploying CIRCLE_SHA1 to ENVIRONMENT_NAME.'
+          color: '#ffffff'
+          message: 'Deploying CIRCLE_SHA1 to *QA*.'
           webhook: '${SLACK_WEBHOOK}'
       - run: 
           name: "Setup custom environment variables"
@@ -59,7 +59,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#ffffff'
-          title: ':white_circle: ${CIRCLE_PROJECT_REPONAME} deployed to ${CIRCLE_TAG}'
+          title: ':white_circle: ${CIRCLE_PROJECT_REPONAME} deployed to *QA*'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           webhook: '${SLACK_WEBHOOK}'
@@ -72,9 +72,8 @@ jobs:
     steps:
       - slack/notify:
           channel: 'returns-deployment'
-          mentions: 'jin.chen,ankush.goyal,steve'
-          color: '#bada55'
-          message: 'Deploying CIRCLE_SHA1 to ENVIRONMENT_NAME.'
+          color: '#0000ff'
+          message: 'Deploying CIRCLE_SHA1 to *STAGING*'
           webhook: '${SLACK_WEBHOOK}'
       - run: 
           name: "Setup custom environment variables"
@@ -89,7 +88,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#0000ff'
-          title: ':large_blue_circle: ${CIRCLE_PROJECT_REPONAME} deployed to ${CIRCLE_TAG}'
+          title: ':large_blue_circle: ${CIRCLE_PROJECT_REPONAME} deployed to *STAGING*'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           webhook: '${SLACK_WEBHOOK}'
@@ -102,9 +101,8 @@ jobs:
     steps:
       - slack/notify:
           channel: 'returns-deployment'
-          mentions: 'jin.chen,ankush.goyal,steve'
-          color: '#bada55'
-          message: 'Deploying CIRCLE_SHA1 to ENVIRONMENT_NAME.'
+          color: '#ff0000'
+          message: 'Deploying CIRCLE_SHA1 to *PRODUCTION*.'
           webhook: '${SLACK_WEBHOOK}'
       - run: 
           name: "Setup custom environment variables"
@@ -119,7 +117,7 @@ jobs:
       - slack/notify:
           channel: 'returns-deployment'
           color: '#ff0000'
-          title: ':red_circle: ${CIRCLE_PROJECT_REPONAME} deployed to ${CIRCLE_TAG}'
+          title: ':red_circle: ${CIRCLE_PROJECT_REPONAME} deployed to *PRODUCTION*'
           title_link: '${CIRCLE_COMPARE_URL}'
           message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           webhook: '${SLACK_WEBHOOK}'
@@ -142,7 +140,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^production$/
+              only: /^deploy-production-.*$/
 
   CircleCITest_Deploy_Stage:
     jobs:
@@ -151,7 +149,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^stage$/
+              only: /^deploy-stage-.*$/
 
   CircleCITest_Deploy_QA:
     jobs:
@@ -160,7 +158,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^(qa01|qa02)$/
+              only: /^deploy-(qa01|qa02)-.*$/
 
   
 
