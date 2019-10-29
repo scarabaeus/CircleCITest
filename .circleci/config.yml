@@ -159,7 +159,7 @@ workflows:
   CircleCITest_Deploy_Prod:
     jobs:
       - slack/approval-notification:
-          message: '*Branch:* ${CIRCLE_BRANCH} - *Tag:* \`${CIRCLE_TAG}\` - *Initiator:* \`${CIRCLE_USERNAME}\`'
+          message: ':red_circle: Returns Front End deployment initiated to PRODUCTION by ${CIRCLE_USERNAME} - APPROVAL REQUIRED'
           url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
           color: "#ff0000"
           webhook: '${SLACK_WEBHOOK}'
