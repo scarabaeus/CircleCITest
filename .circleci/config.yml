@@ -22,9 +22,13 @@ jobs:
           channel: 'returns-deployment'
           # mentions: 'jin.chen,ankush.goyal,steve'
           color: '#bada55'
-          message: 'Build package created for Repo: ${CIRCLE_PROJECT_REPONAME} Branch: ${CIRCLE_BRANCH}'
+          title: '${CIRCLE_PROJECT_REPONAME} Build Package Created'
+          message: 'Branch: ${CIRCLE_BRANCH}'
           footer: 'To deploy: git tag ${CIRCLE_SHA1} <environment>'
           webhook: '${SLACK_WEBHOOK}'
+          include_project_field: false
+          include_job_number_field: false
+          
 
   retrieve_package:
     docker:
