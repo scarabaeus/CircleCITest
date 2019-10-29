@@ -20,11 +20,10 @@ jobs:
             echo 'export DEPLOYMENT_BUNDLE_NAME="${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BRANCH}.${CIRCLE_BUILD_NUM}.${CIRCLE_SHA1}.zip"' >> $BASH_ENV
       - slack/notify:
           channel: 'returns-deployment'
-          # mentions: 'jin.chen,ankush.goyal,steve'
           color: '#bada55'
           title: ':package: ${CIRCLE_PROJECT_REPONAME} repo deployment package created'
           title_link: '${CIRCLE_COMPARE_URL}'
-          message: 'Branch: ${CIRCLE_BRANCH} - Initiator: ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
+          message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           footer: 'To deploy: \`git tag ${CIRCLE_SHA1} <environment>\`'
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
@@ -37,7 +36,7 @@ jobs:
     steps:
       - run: echo "Run Retrieve"
   
-  deploy:
+  qa_deploy:
     docker:
       - image: circleci/node:7.10
     steps:
@@ -59,10 +58,73 @@ jobs:
           command: echo ${DEPLOYMENT_BUNDLE_NAME}
       - slack/notify:
           channel: 'returns-deployment'
-          mentions: 'jin.chen,ankush.goyal'
-          color: '#bada55'
-          message: 'Deployment of CIRCLE_SHA1 to ENVIRONMENT_NAME complete.'
+          color: '#ffffff'
+          title: ':white_circle: ${CIRCLE_PROJECT_REPONAME} deployed to ${CIRCLE_TAG}'
+          title_link: '${CIRCLE_COMPARE_URL}'
+          message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
           webhook: '${SLACK_WEBHOOK}'
+          include_project_field: false
+          include_job_number_field: false
+
+  stage_deploy:
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - slack/notify:
+          channel: 'returns-deployment'
+          mentions: 'jin.chen,ankush.goyal,steve'
+          color: '#bada55'
+          message: 'Deploying CIRCLE_SHA1 to ENVIRONMENT_NAME.'
+          webhook: '${SLACK_WEBHOOK}'
+      - run: 
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export DEPLOYMENT_BUNDLE_NAME="${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BRANCH}.${CIRCLE_BUILD_NUM}.${CIRCLE_SHA1}.zip"' >> $BASH_ENV
+      - run:
+          name: "My Deployment Output"
+          command: echo ${CIRCLE_BRANCH}
+      - run:
+          name: "Deployment Bundle"
+          command: echo ${DEPLOYMENT_BUNDLE_NAME}
+      - slack/notify:
+          channel: 'returns-deployment'
+          color: '#0000ff'
+          title: ':large_blue_circle: ${CIRCLE_PROJECT_REPONAME} deployed to ${CIRCLE_TAG}'
+          title_link: '${CIRCLE_COMPARE_URL}'
+          message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
+          webhook: '${SLACK_WEBHOOK}'
+          include_project_field: false
+          include_job_number_field: false
+
+  prod_deploy:
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - slack/notify:
+          channel: 'returns-deployment'
+          mentions: 'jin.chen,ankush.goyal,steve'
+          color: '#bada55'
+          message: 'Deploying CIRCLE_SHA1 to ENVIRONMENT_NAME.'
+          webhook: '${SLACK_WEBHOOK}'
+      - run: 
+          name: "Setup custom environment variables"
+          command: |
+            echo 'export DEPLOYMENT_BUNDLE_NAME="${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BRANCH}.${CIRCLE_BUILD_NUM}.${CIRCLE_SHA1}.zip"' >> $BASH_ENV
+      - run:
+          name: "My Deployment Output"
+          command: echo ${CIRCLE_BRANCH}
+      - run:
+          name: "Deployment Bundle"
+          command: echo ${DEPLOYMENT_BUNDLE_NAME}
+      - slack/notify:
+          channel: 'returns-deployment'
+          color: '#ff0000'
+          title: ':red_circle: ${CIRCLE_PROJECT_REPONAME} deployed to ${CIRCLE_TAG}'
+          title_link: '${CIRCLE_COMPARE_URL}'
+          message: '*Branch:* ${CIRCLE_BRANCH} - *Initiator:* ${CIRCLE_USERNAME} ${CIRCLE_PULL_REQUEST}'
+          webhook: '${SLACK_WEBHOOK}'
+          include_project_field: false
+          include_job_number_field: false
       
 workflows:
   version: 2
@@ -75,7 +137,7 @@ workflows:
 
   CircleCITest_Deploy_Prod:
     jobs:
-      - deploy:
+      - prod_deploy:
           filters:
             branches:
               ignore: /.*/
@@ -84,7 +146,7 @@ workflows:
 
   CircleCITest_Deploy_Stage:
     jobs:
-      - deploy:
+      - stage_deploy:
           filters:
             branches:
               ignore: /.*/
@@ -93,7 +155,7 @@ workflows:
 
   CircleCITest_Deploy_QA:
     jobs:
-      - deploy:
+      - qa_deploy:
           filters:
             branches:
               ignore: /.*/
