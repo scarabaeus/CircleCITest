@@ -158,6 +158,13 @@ workflows:
 
   CircleCITest_Deploy_Prod:
     jobs:
+      - hold:
+          type: approval
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^deploy-production-.*$/
       - slack/approval-notification:
           message: ':sparkling_heart: APPROVAL REQUIRED - Returns Front End deployment initiated to PRODUCTION by ${CIRCLE_USERNAME}'
           url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
@@ -172,7 +179,13 @@ workflows:
               only: /^deploy-production-.*$/
       - prod_deploy:
           requires:
+            - hold
             - slack/approval-notification
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^deploy-production-.*$/
       
   CircleCITest_Deploy_Stage:
     jobs:
