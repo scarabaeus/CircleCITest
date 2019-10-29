@@ -149,7 +149,7 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^deploy-production-.*$/
+              only: /^production-.*$/
       - slack/approval-notification:
           message: 'APPROVAL REQUIRED - Returns Front End deployment initiated to PRODUCTION by ${CIRCLE_USERNAME}'
           url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
@@ -174,7 +174,29 @@ workflows:
       
   CircleCITest_Deploy_Stage:
     jobs:
+      - hold:
+          type: approval
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^stage-.*$/
+      - slack/approval-notification:
+          message: 'APPROVAL REQUIRED - Returns Front End deployment initiated to STAGING by ${CIRCLE_USERNAME}'
+          url: 'https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}'
+          color: "#E97F02"
+          webhook: '${SLACK_WEBHOOK}'
+          include_project_field: false
+          include_job_number_field: false
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^stage-.*$/
       - stage_deploy:
+          requires:
+            - hold
+            - slack/approval-notification
           filters:
             branches:
               ignore: /.*/
@@ -183,6 +205,13 @@ workflows:
 
   CircleCITest_Deploy_QA:
     jobs:
+      - qa_deploy:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^(qa01|qa02)-.*$/
+
       - qa_deploy:
           filters:
             branches:
