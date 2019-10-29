@@ -165,7 +165,6 @@ workflows:
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
           include_job_number_field: false
-          type: approval
           filters:
             branches:
               ignore: /.*/
