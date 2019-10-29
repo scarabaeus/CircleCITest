@@ -165,6 +165,11 @@ workflows:
           webhook: '${SLACK_WEBHOOK}'
           include_project_field: false
           include_job_number_field: false
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^deploy-production-.*$/
       - prod_deploy:
           filters:
             branches:
