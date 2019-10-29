@@ -218,38 +218,3 @@ workflows:
               ignore: /.*/
             tags:
               only: /^(qa01|qa02)-.*$/
-
-  
-
-        
-
-# version: 2
-# jobs:
-#   build:
-#     docker:
-#       - image: circleci/node:7.10
-#     steps:
-#       - checkout
-#       - restore_cache:
-#         - run: echo "Build Test"
-
-#   deploy: 
-#     filters:
-#       tags:
-#         only: /^\d+\.\d+\.\d+$/
-#     steps:
-#       - run: echo "Deploy Test"
-
-# workflows:
-#   version: 2
-#   CircleCITest_build:
-#     jobs:
-#       - build
-  # CircleCITest_deploy:
-  #   filters:
-  #     branches:
-  #       ignore: /.*/
-  #     tags:
-  #       only: /^\d+\.\d+\.\d+$/
-  #   jobs:
-  #      - deploy
